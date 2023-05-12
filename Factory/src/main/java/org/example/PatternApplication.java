@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.notification.MailNotification;
+import org.example.notification.Notification;
 import org.example.notification.NotificationFactory;
 import org.example.notification.SMSNotification;
 import org.example.notification.enums.NotificationTypeEnum;
@@ -13,12 +14,11 @@ public class PatternApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PatternApplication.class, args);
+        
+        Notification notificationMail = NotificationFactory.create(NotificationTypeEnum.MAIL);
+        Notification notificationSMS = NotificationFactory.create(NotificationTypeEnum.SMS);
 
-        MailNotification mailNotification = (MailNotification) NotificationFactory.create(NotificationTypeEnum.MAIL);
-
-        SMSNotification smsNotification = (SMSNotification) NotificationFactory.create(NotificationTypeEnum.SMS);
-
-        mailNotification.push();
-        smsNotification.push();
+        notificationMail.push();
+        notificationSMS.push();
     }
 }
